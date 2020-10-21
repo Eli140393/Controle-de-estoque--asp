@@ -8,10 +8,13 @@ namespace ControleDeEstoque.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
+
         public ActionResult Index()
         {
             return View();
         }
+        [Authorize]
 
         public ActionResult Sobre()
         {
