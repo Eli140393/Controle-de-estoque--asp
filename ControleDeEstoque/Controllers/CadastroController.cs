@@ -31,6 +31,24 @@ namespace ControleDeEstoque.Controllers
 
         [HttpPost]
         [Authorize]
+        public ActionResult SalvarGrupoProduto(GrupoProdutoModel model)
+        {
+            var registroBD = _listaGrupoProdutos.Find(x => x.Id == model.Id);
+            if(registroBD == null)
+            {
+                registroBD = model;
+                registroBD.Id = _listaGrupoProdutos.Max(x => x.Id) + 1;
+                _listaGrupoProdutos.Add(registroBD);
+            }
+            else
+            {
+                registroBD.Nome = model.Nome;
+                registroBD.Ativo = model.Ativo;
+            }
+            return Json(registroBD);
+        }
+        [HttpPost]
+        [Authorize]
         public ActionResult ExcluirGrupoProduto(int id)
         {
             var ret = false;
